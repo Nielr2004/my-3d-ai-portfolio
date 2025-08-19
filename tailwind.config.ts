@@ -52,16 +52,27 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				sidebar: {
-					DEFAULT: 'hsl(var(--sidebar-background))',
-					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-					border: 'hsl(var(--sidebar-border))',
-					ring: 'hsl(var(--sidebar-ring))'
+				// Custom Portfolio Theme Colors
+				electric: {
+					DEFAULT: 'hsl(var(--electric-blue))',
+					muted: 'hsl(var(--electric-blue-muted))'
+				},
+				neon: 'hsl(var(--neon-purple))',
+				cosmic: {
+					DEFAULT: 'hsl(var(--cosmic-dark))',
+					deep: 'hsl(var(--deep-space))',
+					stellar: 'hsl(var(--stellar-gray))'
 				}
+			},
+			backgroundImage: {
+				'gradient-hero': 'var(--gradient-hero)',
+				'gradient-card': 'var(--gradient-card)',
+				'gradient-electric': 'var(--gradient-electric)'
+			},
+			boxShadow: {
+				'electric': 'var(--shadow-electric)',
+				'purple': 'var(--shadow-purple)',
+				'card': 'var(--shadow-card)'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
