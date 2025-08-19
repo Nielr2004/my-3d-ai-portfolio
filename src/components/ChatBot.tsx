@@ -52,8 +52,31 @@ const ChatBot = () => {
     if (lowerMessage.includes('hello') || lowerMessage.includes('hi')) {
       return "Hey! Glad you're here. Feel free to ask me anything about Snehashis's work.";
     }
+
+    if (lowerMessage.includes('education') || lowerMessage.includes('college') || lowerMessage.includes('university')) {
+      return "Snehashis is currently pursuing a B.Tech in Computer Science and Engineering at The Assam Kaziranga University, expected to graduate in 2026.";
+    }
+
+    if (lowerMessage.includes('hobbies') || lowerMessage.includes('fun')) {
+      return "When he's not coding, Snehashis enjoys exploring new design trends, playing video games, and diving into sci-fi movies. He's also a big fan of trying out different kinds of ramen!";
+    }
+
+    if (lowerMessage.includes('react')) {
+      return "He loves React! It's his go-to for building dynamic and interactive user interfaces. You can see it in action in his portfolio website project.";
+    }
+
+    if (lowerMessage.includes('python')) {
+      return "Python is one of his favorite languages, especially for data analysis and AI/ML projects. His Ramen Data Analysis and FaceTrack+ projects are great examples of his Python skills.";
+    }
     
-    return "That's a great question! While I'm just a simple bot, I can tell you all about his projects and skills. Try asking about his 'Virtual Zoo' project!";
+    const randomResponses = [
+        "That's an interesting question! Let me check...",
+        "I'm not sure about that, but I can tell you about his projects!",
+        "Good one! Why don't you ask him that directly through the contact form?",
+        "I'm just a bot, but I'm learning! Try asking me about his skills."
+    ];
+
+    return randomResponses[Math.floor(Math.random() * randomResponses.length)];
   };
 
   const handleSendMessage = async () => {
@@ -95,16 +118,17 @@ const ChatBot = () => {
     <>
       {/* Chat Toggle Button */}
       <motion.div
-        className="fixed bottom-24 right-6 z-50"
+        className="fixed bottom-6 right-6 z-50"
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ delay: 2 }}
+        whileHover={{ scale: 1.1 }}
       >
         <Button
           onClick={() => setIsOpen(!isOpen)}
           variant="default"
           size="icon"
-          className="w-14 h-14 rounded-full shadow-playful"
+          className="w-14 h-14 rounded-full shadow-playful animate-bounce-light"
         >
           <AnimatePresence mode="wait">
             {isOpen ? (
@@ -137,45 +161,45 @@ const ChatBot = () => {
             initial={{ opacity: 0, y: 100, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 100, scale: 0.8 }}
-            className="fixed bottom-40 right-6 z-40 w-80 h-96"
+            className="fixed bottom-24 right-6 z-40 w-80 h-[28rem]"
           >
-            <Card className="bg-gradient-card border-border h-full flex flex-col shadow-card">
-              <CardHeader className="pb-4">
+            <Card className="bg-background/80 backdrop-blur-lg border-border h-full flex flex-col shadow-card">
+              <CardHeader className="pb-4 border-b">
                 <CardTitle className="flex items-center gap-3 text-primary">
                   <Bot className="h-5 w-5" />
                   AI Assistant
                 </CardTitle>
               </CardHeader>
               
-              <CardContent className="flex-1 flex flex-col p-4 pt-0">
+              <CardContent className="flex-1 flex flex-col p-0 overflow-hidden">
                 {/* Messages */}
-                <div className="flex-1 overflow-y-auto space-y-3 mb-4">
+                <div className="flex-1 overflow-y-auto space-y-4 p-4 pr-2 scrollbar-thin">
                   {messages.map((message) => (
                     <motion.div
                       key={message.id}
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className={`flex gap-2 ${
+                      className={`flex gap-2.5 ${
                         message.sender === 'user' ? 'justify-end' : 'justify-start'
                       }`}
                     >
                       {message.sender === 'bot' && (
-                        <div className="w-6 h-6 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
-                          <Bot className="h-3 w-3 text-primary" />
+                        <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
+                          <Bot className="h-4 w-4 text-primary" />
                         </div>
                       )}
                       <div
-                        className={`max-w-[75%] p-3 rounded-lg text-sm ${
+                        className={`max-w-[80%] p-3 rounded-2xl text-sm ${
                           message.sender === 'user'
-                            ? 'bg-primary text-primary-foreground'
-                            : 'bg-secondary text-secondary-foreground'
+                            ? 'bg-primary text-primary-foreground rounded-br-none'
+                            : 'bg-secondary text-secondary-foreground rounded-bl-none'
                         }`}
                       >
                         {message.content}
                       </div>
                       {message.sender === 'user' && (
-                        <div className="w-6 h-6 bg-secondary rounded-full flex items-center justify-center flex-shrink-0">
-                          <User className="h-3 w-3 text-secondary-foreground" />
+                        <div className="w-8 h-8 bg-secondary rounded-full flex items-center justify-center flex-shrink-0">
+                          <User className="h-4 w-4 text-secondary-foreground" />
                         </div>
                       )}
                     </motion.div>
@@ -185,16 +209,16 @@ const ChatBot = () => {
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="flex gap-2 justify-start"
+                      className="flex gap-2.5 justify-start"
                     >
-                      <div className="w-6 h-6 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
-                        <Bot className="h-3 w-3 text-primary" />
+                      <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
+                        <Bot className="h-4 w-4 text-primary" />
                       </div>
-                      <div className="bg-secondary p-3 rounded-lg">
-                        <div className="flex gap-1">
+                      <div className="bg-secondary p-3 rounded-2xl rounded-bl-none">
+                        <div className="flex gap-1.5">
                           <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-                          <div className="w-2 h-2 bg-primary rounded-full animate-pulse delay-100" />
-                          <div className="w-2 h-2 bg-primary rounded-full animate-pulse delay-200" />
+                          <div className="w-2 h-2 bg-primary rounded-full animate-pulse [animation-delay:0.2s]" />
+                          <div className="w-2 h-2 bg-primary rounded-full animate-pulse [animation-delay:0.4s]" />
                         </div>
                       </div>
                     </motion.div>
@@ -203,7 +227,7 @@ const ChatBot = () => {
                 </div>
 
                 {/* Input */}
-                <div className="flex gap-2">
+                <div className="flex gap-2 border-t p-4">
                   <Input
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
@@ -216,6 +240,7 @@ const ChatBot = () => {
                     variant="default"
                     size="icon"
                     disabled={!input.trim() || isTyping}
+                    className="w-10 h-10"
                   >
                     <Send className="h-4 w-4" />
                   </Button>
