@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import Scene3D from './Scene3D';
 import { useEffect, useState } from 'react';
+import { ChevronDown } from 'lucide-react';
 
 const roles = [
     "A Web Developer", 
@@ -9,7 +10,9 @@ const roles = [
     "An UI/UX Developer",
     "A Backend Developer",
     "An AI/ML Developer",
-    "A Gen AI Developer"
+    "A Gen AI Developer",
+    "A Data Analyst",
+    "A Data Visualizer"
 ];
 
 const HeroSection = () => {
@@ -67,7 +70,7 @@ const HeroSection = () => {
               transition={{ delay: 0.2 }}
               className="text-5xl md:text-7xl font-bold leading-tight"
             >
-              Hi, I'm a Snehashis Roy
+              Hi, I'm Snehashis Roy
               <span className="block text-transparent bg-gradient-playful bg-clip-text min-h-[100px] md:min-h-[120px]">
                 {text}
                 <span className="opacity-50 animate-pulse">|</span>
@@ -82,28 +85,6 @@ const HeroSection = () => {
             >
               I love bringing ideas to life with code, creating cool stuff for the web that's both fun to use and looks great.
             </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
-            >
-              <Button 
-                variant="default" 
-                size="lg"
-                onClick={() => scrollToSection('portfolio')}
-              >
-                My Work
-              </Button>
-              <Button 
-                variant="outline" 
-                size="lg"
-                onClick={() => scrollToSection('contact')}
-              >
-                Get in Touch
-              </Button>
-            </motion.div>
           </motion.div>
 
           {/* Right 3D Scene */}
@@ -117,6 +98,25 @@ const HeroSection = () => {
           </motion.div>
         </div>
       </div>
+      
+      {/* Scroll Down Indicator */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 2.5, duration: 0.5 }}
+        className="absolute bottom-24 left-1/2 -translate-x-1/2"
+      >
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{
+            duration: 1.5,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        >
+          <ChevronDown className="w-8 h-8 text-foreground/50" />
+        </motion.div>
+      </motion.div>
     </section>
   );
 };

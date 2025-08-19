@@ -24,6 +24,7 @@ const ChatBot = () => {
   ]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -79,12 +80,12 @@ const ChatBot = () => {
     return randomResponses[Math.floor(Math.random() * randomResponses.length)];
   };
 
-  const handleSendMessage = async () => {
-    if (!input.trim()) return;
+  const handleSendMessage = (messageContent: string) => {
+    if (!messageContent.trim()) return;
 
     const userMessage: Message = {
       id: Date.now().toString(),
-      content: input,
+      content: messageContent,
       sender: 'user',
       timestamp: new Date()
     };
@@ -92,12 +93,12 @@ const ChatBot = () => {
     setMessages(prev => [...prev, userMessage]);
     setInput('');
     setIsTyping(true);
+    setShowSuggestions(false);
 
-    // Simulate AI thinking time
     setTimeout(() => {
       const botResponse: Message = {
         id: (Date.now() + 1).toString(),
-        content: generateBotResponse(input),
+        content: generateBotResponse(messageContent),
         sender: 'bot',
         timestamp: new Date()
       };
@@ -107,18 +108,17 @@ const ChatBot = () => {
     }, 1000 + Math.random() * 1000);
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSendMessage();
-    }
-  };
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    handleSendMessage(input);
+  }
+
+  const suggestions = ["Tell me about your projects", "What are your skills?", "How can I contact you?"];
 
   return (
     <>
-      {/* Chat Toggle Button */}
       <motion.div
-        className="fixed bottom-6 right-6 z-50"
+        className="fixed bottom-24 right-6 z-50"
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ delay: 2 }}
@@ -132,21 +132,11 @@ const ChatBot = () => {
         >
           <AnimatePresence mode="wait">
             {isOpen ? (
-              <motion.div
-                key="close"
-                initial={{ rotate: -90, opacity: 0 }}
-                animate={{ rotate: 0, opacity: 1 }}
-                exit={{ rotate: 90, opacity: 0 }}
-              >
+              <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }}>
                 <X className="h-6 w-6" />
               </motion.div>
             ) : (
-              <motion.div
-                key="chat"
-                initial={{ rotate: 90, opacity: 0 }}
-                animate={{ rotate: 0, opacity: 1 }}
-                exit={{ rotate: -90, opacity: 0 }}
-              >
+              <motion.div key="chat" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }}>
                 <MessageCircle className="h-6 w-6" />
               </motion.div>
             )}
@@ -154,14 +144,13 @@ const ChatBot = () => {
         </Button>
       </motion.div>
 
-      {/* Chat Window */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, y: 100, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 100, scale: 0.8 }}
-            className="fixed bottom-24 right-6 z-40 w-80 h-[28rem]"
+            className="fixed bottom-[120px] right-6 z-40 w-80 h-[28rem]"
           >
             <Card className="bg-background/80 backdrop-blur-lg border-border h-full flex flex-col shadow-card">
               <CardHeader className="pb-4 border-b">
@@ -172,8 +161,7 @@ const ChatBot = () => {
               </CardHeader>
               
               <CardContent className="flex-1 flex flex-col p-0 overflow-hidden">
-                {/* Messages */}
-                <div className="flex-1 overflow-y-auto space-y-4 p-4 pr-2 scrollbar-thin">
+                <div className="flex-1 overflow-y-auto space-y-4 p-4 scrollbar-hide">
                   {messages.map((message) => (
                     <motion.div
                       key={message.id}
@@ -206,11 +194,7 @@ const ChatBot = () => {
                   ))}
                   
                   {isTyping && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="flex gap-2.5 justify-start"
-                    >
+                    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex gap-2.5 justify-start">
                       <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
                         <Bot className="h-4 w-4 text-primary" />
                       </div>
@@ -225,18 +209,26 @@ const ChatBot = () => {
                   )}
                   <div ref={messagesEndRef} />
                 </div>
+                
+                {showSuggestions && !isTyping && (
+                  <div className="p-4 border-t flex flex-col items-start gap-2">
+                    {suggestions.map(suggestion => (
+                      <Button key={suggestion} variant="outline" size="sm" onClick={() => handleSendMessage(suggestion)}>
+                        {suggestion}
+                      </Button>
+                    ))}
+                  </div>
+                )}
 
-                {/* Input */}
-                <div className="flex gap-2 border-t p-4">
+                <form onSubmit={handleFormSubmit} className="flex gap-2 border-t p-4">
                   <Input
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
-                    onKeyPress={handleKeyPress}
                     placeholder="Ask me anything..."
                     className="bg-background border-input focus:border-primary text-sm"
                   />
                   <Button
-                    onClick={handleSendMessage}
+                    type="submit"
                     variant="default"
                     size="icon"
                     disabled={!input.trim() || isTyping}
@@ -244,7 +236,7 @@ const ChatBot = () => {
                   >
                     <Send className="h-4 w-4" />
                   </Button>
-                </div>
+                </form>
               </CardContent>
             </Card>
           </motion.div>

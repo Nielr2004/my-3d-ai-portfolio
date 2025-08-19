@@ -127,19 +127,11 @@ All colors MUST be HSL.
   }
 
   /* Custom scrollbar for chat */
-  .scrollbar-thin {
-    scrollbar-width: thin;
-    scrollbar-color: hsl(var(--primary) / 0.5) transparent;
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
-  .scrollbar-thin::-webkit-scrollbar {
-    width: 6px;
-  }
-  .scrollbar-thin::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  .scrollbar-thin::-webkit-scrollbar-thumb {
-    background-color: hsl(var(--primary) / 0.5);
-    border-radius: 10px;
-    border: 3px solid transparent;
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
   }
 }
