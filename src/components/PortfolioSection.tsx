@@ -5,6 +5,8 @@ import { ExternalLink, Github } from 'lucide-react';
 import project1 from '@/assets/project-1.jpg';
 import project2 from '@/assets/project-2.jpg';
 import project3 from '@/assets/project-3.jpg';
+import project4 from '@/assets/project-4.jpg';
+import project5 from '@/assets/project-5.jpg';
 
 const projects = [
   {
@@ -31,6 +33,24 @@ const projects = [
     description: "Responsive e-commerce platform with AI-driven recommendations, seamless payment integration, and modern UI/UX.",
     image: project3,
     technologies: ["React Native", "Firebase", "Stripe", "Redux"],
+    liveUrl: "#",
+    githubUrl: "#"
+  },
+  {
+    id: 4,
+    title: "Data Analytics Dashboard",
+    description: "Interactive dashboard with real-time data visualization, advanced filtering, and intelligent insights generation.",
+    image: project4,
+    technologies: ["Vue.js", "D3.js", "Python", "PostgreSQL"],
+    liveUrl: "#",
+    githubUrl: "#"
+  },
+  {
+    id: 5,
+    title: "Neural Network Visualizer",
+    description: "3D visualization tool for neural networks with interactive exploration and real-time training visualization.",
+    image: project5,
+    technologies: ["Three.js", "TensorFlow", "WebGL", "React"],
     liveUrl: "#",
     githubUrl: "#"
   }
@@ -110,7 +130,7 @@ const PortfolioSection = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
+          {projects.slice(0, 6).map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
           ))}
         </div>
