@@ -17,7 +17,7 @@ const ChatBot = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      content: "Hi! I'm an AI assistant. Ask me about the portfolio, projects, or anything else!",
+      content: "Hey there! I'm Snehashis's AI assistant. Got any questions about my work? Ask away!",
       sender: 'bot',
       timestamp: new Date()
     }
@@ -38,22 +38,22 @@ const ChatBot = () => {
     const lowerMessage = userMessage.toLowerCase();
     
     if (lowerMessage.includes('portfolio') || lowerMessage.includes('project')) {
-      return "The portfolio showcases 3 main projects: an AI-powered web app, an intelligent chatbot platform, and an e-commerce mobile app. Each demonstrates modern web technologies and innovative solutions.";
+      return "Snehashis has worked on some cool stuff! You can check out projects like a Virtual Zoo, his portfolio site, and even some data analysis on ramen. Anything specific you want to know?";
     }
     
     if (lowerMessage.includes('skill') || lowerMessage.includes('technology')) {
-      return "Key technologies include React, TypeScript, Node.js, AI/ML integration, Three.js for 3D graphics, and modern design systems. The focus is on cutting-edge web development and AI integration.";
+      return "He's got a bunch of skills! We're talking React, TypeScript, Node.js, AI/ML stuff, and a good eye for design. He's a bit of a tech playground enthusiast!";
     }
     
     if (lowerMessage.includes('contact') || lowerMessage.includes('hire')) {
-      return "You can reach out through the contact form below or email directly at hello@portfolio.dev. Response time is usually within 24 hours!";
+      return "Want to get in touch? The best way is through the contact form on this page or by shooting an email to roysnehashis2004@gmail.com. He's pretty quick to respond!";
     }
     
     if (lowerMessage.includes('hello') || lowerMessage.includes('hi')) {
-      return "Hello! Thanks for visiting the portfolio. What would you like to know about the projects or experience?";
+      return "Hey! Glad you're here. Feel free to ask me anything about Snehashis's work.";
     }
     
-    return "That's an interesting question! Feel free to ask about the portfolio projects, technologies used, or how to get in touch for collaborations.";
+    return "That's a great question! While I'm just a simple bot, I can tell you all about his projects and skills. Try asking about his 'Virtual Zoo' project!";
   };
 
   const handleSendMessage = async () => {
@@ -95,16 +95,16 @@ const ChatBot = () => {
     <>
       {/* Chat Toggle Button */}
       <motion.div
-        className="fixed bottom-6 right-6 z-50"
+        className="fixed bottom-24 right-6 z-50"
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ delay: 2 }}
       >
         <Button
           onClick={() => setIsOpen(!isOpen)}
-          variant="hero"
+          variant="default"
           size="icon"
-          className="w-14 h-14 rounded-full shadow-electric"
+          className="w-14 h-14 rounded-full shadow-playful"
         >
           <AnimatePresence mode="wait">
             {isOpen ? (
@@ -137,11 +137,11 @@ const ChatBot = () => {
             initial={{ opacity: 0, y: 100, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 100, scale: 0.8 }}
-            className="fixed bottom-24 right-6 z-40 w-80 h-96"
+            className="fixed bottom-40 right-6 z-40 w-80 h-96"
           >
-            <Card className="bg-gradient-card border-electric/20 h-full flex flex-col shadow-card">
+            <Card className="bg-gradient-card border-border h-full flex flex-col shadow-card">
               <CardHeader className="pb-4">
-                <CardTitle className="flex items-center gap-3 text-electric">
+                <CardTitle className="flex items-center gap-3 text-primary">
                   <Bot className="h-5 w-5" />
                   AI Assistant
                 </CardTitle>
@@ -160,22 +160,22 @@ const ChatBot = () => {
                       }`}
                     >
                       {message.sender === 'bot' && (
-                        <div className="w-6 h-6 bg-electric/20 rounded-full flex items-center justify-center flex-shrink-0">
-                          <Bot className="h-3 w-3 text-electric" />
+                        <div className="w-6 h-6 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
+                          <Bot className="h-3 w-3 text-primary" />
                         </div>
                       )}
                       <div
                         className={`max-w-[75%] p-3 rounded-lg text-sm ${
                           message.sender === 'user'
-                            ? 'bg-electric text-cosmic-deep'
-                            : 'bg-cosmic-stellar text-foreground'
+                            ? 'bg-primary text-primary-foreground'
+                            : 'bg-secondary text-secondary-foreground'
                         }`}
                       >
                         {message.content}
                       </div>
                       {message.sender === 'user' && (
-                        <div className="w-6 h-6 bg-electric/20 rounded-full flex items-center justify-center flex-shrink-0">
-                          <User className="h-3 w-3 text-electric" />
+                        <div className="w-6 h-6 bg-secondary rounded-full flex items-center justify-center flex-shrink-0">
+                          <User className="h-3 w-3 text-secondary-foreground" />
                         </div>
                       )}
                     </motion.div>
@@ -187,14 +187,14 @@ const ChatBot = () => {
                       animate={{ opacity: 1, y: 0 }}
                       className="flex gap-2 justify-start"
                     >
-                      <div className="w-6 h-6 bg-electric/20 rounded-full flex items-center justify-center flex-shrink-0">
-                        <Bot className="h-3 w-3 text-electric" />
+                      <div className="w-6 h-6 bg-primary/20 rounded-full flex items-center justify-center flex-shrink-0">
+                        <Bot className="h-3 w-3 text-primary" />
                       </div>
-                      <div className="bg-cosmic-stellar p-3 rounded-lg">
+                      <div className="bg-secondary p-3 rounded-lg">
                         <div className="flex gap-1">
-                          <div className="w-2 h-2 bg-electric rounded-full animate-pulse" />
-                          <div className="w-2 h-2 bg-electric rounded-full animate-pulse delay-100" />
-                          <div className="w-2 h-2 bg-electric rounded-full animate-pulse delay-200" />
+                          <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+                          <div className="w-2 h-2 bg-primary rounded-full animate-pulse delay-100" />
+                          <div className="w-2 h-2 bg-primary rounded-full animate-pulse delay-200" />
                         </div>
                       </div>
                     </motion.div>
@@ -209,11 +209,11 @@ const ChatBot = () => {
                     onChange={(e) => setInput(e.target.value)}
                     onKeyPress={handleKeyPress}
                     placeholder="Ask me anything..."
-                    className="bg-cosmic border-electric/30 focus:border-electric text-sm"
+                    className="bg-background border-input focus:border-primary text-sm"
                   />
                   <Button
                     onClick={handleSendMessage}
-                    variant="electric"
+                    variant="default"
                     size="icon"
                     disabled={!input.trim() || isTyping}
                   >

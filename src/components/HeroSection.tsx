@@ -1,8 +1,45 @@
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import Scene3D from './Scene3D';
+import { useEffect, useState } from 'react';
+
+const roles = [
+    "A Web Developer", 
+    "A Frontend Developer", 
+    "An UI/UX Developer",
+    "A Backend Developer",
+    "An AI/ML Developer",
+    "A Gen AI Developer"
+];
 
 const HeroSection = () => {
+  const [index, setIndex] = useState(0);
+  const [text, setText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const typingSpeed = isDeleting ? 75 : 150;
+    const currentRole = roles[index];
+
+    const handleTyping = () => {
+      if (isDeleting) {
+        setText(currentRole.substring(0, text.length - 1));
+      } else {
+        setText(currentRole.substring(0, text.length + 1));
+      }
+
+      if (!isDeleting && text === currentRole) {
+        setTimeout(() => setIsDeleting(true), 2000);
+      } else if (isDeleting && text === '') {
+        setIsDeleting(false);
+        setIndex((prevIndex) => (prevIndex + 1) % roles.length);
+      }
+    };
+
+    const timer = setTimeout(handleTyping, typingSpeed);
+    return () => clearTimeout(timer);
+  }, [text, isDeleting, index]);
+  
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -11,75 +48,60 @@ const HeroSection = () => {
   };
 
   return (
-    <section id="hero" className="min-h-screen relative overflow-hidden">
+    <section id="hero" className="min-h-screen relative overflow-hidden flex items-center">
       {/* Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-hero opacity-30" />
+      <div className="absolute inset-0 bg-gradient-hero opacity-20" />
       
-      {/* Grid Pattern */}
-      <div className="absolute inset-0 opacity-20" style={{
-        backgroundImage: `url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%2300BFFF' fill-opacity='0.1'%3E%3Cpath d='M0 0h60v60H0z'/%3E%3Cpath d='M0 0h30v30H0z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
-      }} />
-
-      <div className="max-w-7xl mx-auto px-6 h-screen flex items-center">
+      <div className="max-w-7xl mx-auto px-6 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="space-y-6"
+            className="space-y-6 text-center lg:text-left"
           >
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="inline-block px-4 py-2 bg-electric/10 border border-electric/30 rounded-full text-electric text-sm font-medium"
-            >
-              AI-Powered Developer
-            </motion.div>
-
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
+              transition={{ delay: 0.2 }}
               className="text-5xl md:text-7xl font-bold leading-tight"
             >
-              Building the
-              <span className="block text-transparent bg-gradient-electric bg-clip-text">
-                Future
+              Hi, I'm a Snehashis Roy
+              <span className="block text-transparent bg-gradient-playful bg-clip-text min-h-[100px] md:min-h-[120px]">
+                {text}
+                <span className="opacity-50 animate-pulse">|</span>
               </span>
-              of Web
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="text-xl text-muted-foreground max-w-xl"
+              transition={{ delay: 0.3 }}
+              className="text-xl text-muted-foreground max-w-xl mx-auto lg:mx-0"
             >
-              Crafting innovative web experiences with cutting-edge AI integration, 
-              3D interactions, and modern design principles.
+              I love bringing ideas to life with code, creating cool stuff for the web that's both fun to use and looks great.
             </motion.p>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              className="flex flex-col sm:flex-row gap-4"
+              transition={{ delay: 0.4 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
             >
               <Button 
-                variant="hero" 
+                variant="default" 
                 size="lg"
                 onClick={() => scrollToSection('portfolio')}
               >
-                View My Work
+                My Work
               </Button>
               <Button 
-                variant="neon" 
+                variant="outline" 
                 size="lg"
                 onClick={() => scrollToSection('contact')}
               >
-                Let's Collaborate
+                Get in Touch
               </Button>
             </motion.div>
           </motion.div>
@@ -88,34 +110,13 @@ const HeroSection = () => {
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
             className="h-96 lg:h-[500px] relative"
           >
-            <div className="absolute inset-0 bg-electric/20 rounded-full blur-3xl" />
             <Scene3D />
           </motion.div>
         </div>
       </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
-          className="w-6 h-10 border-2 border-electric rounded-full flex justify-center"
-        >
-          <motion.div
-            animate={{ y: [0, 12, 0] }}
-            transition={{ repeat: Infinity, duration: 2 }}
-            className="w-1 h-3 bg-electric rounded-full mt-2"
-          />
-        </motion.div>
-      </motion.div>
     </section>
   );
 };

@@ -1,42 +1,46 @@
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Sphere, MeshDistortMaterial, Float } from '@react-three/drei';
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-const AnimatedSphere = () => {
-  return (
-    <Float speed={1.75} rotationIntensity={1} floatIntensity={2}>
-      <Sphere args={[1, 100, 200]} scale={2.4}>
-        <MeshDistortMaterial
-          color="#00BFFF"
-          attach="material"
-          distort={0.5}
-          speed={1.5}
-          roughness={0}
-          metalness={0.8}
-        />
-      </Sphere>
-    </Float>
-  );
-};
+// 1. Import your images here
+import wavingImage from '@/assets/waving.png';
+import codingImage from '@/assets/coding.png';
+import drinkingImage from '@/assets/drinking.png';
+import vibingImage from '@/assets/vibing.png';
+
+// 2. Add your imported images to this array
+const images = [
+  wavingImage,
+  codingImage,
+  vibingImage,
+  drinkingImage,
+];
 
 const Scene3D = () => {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    // This sets up the timer for the slideshow
+    const interval = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 3000); // Changes image every 3 seconds
+
+    return () => clearInterval(interval); // Cleans up the timer
+  }, []);
+
   return (
-    <div className="w-full h-full">
-      <Canvas
-        camera={{ position: [0, 0, 6], fov: 75 }}
-        style={{ background: 'transparent' }}
-      >
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[10, 10, 5]} intensity={1} />
-        <pointLight position={[-10, -10, -10]} color="#B300FF" intensity={0.5} />
-        <AnimatedSphere />
-        <OrbitControls
-          enableZoom={false}
-          enablePan={false}
-          autoRotate
-          autoRotateSpeed={0.5}
+    <div className="w-full h-full flex items-center justify-center relative overflow-hidden rounded-lg">
+      <AnimatePresence>
+        <motion.img
+          key={index}
+          src={images[index]}
+          alt="Waving character avatar slideshow"
+          initial={{ opacity: 0, scale: 1.1, x: 50 }}
+          animate={{ opacity: 1, scale: 1, x: 0 }}
+          exit={{ opacity: 0, scale: 0.9, x: -50 }}
+          transition={{ duration: 0.7, ease: 'easeInOut' }}
+          className="absolute w-full h-full object-contain"
         />
-      </Canvas>
+      </AnimatePresence>
     </div>
   );
 };

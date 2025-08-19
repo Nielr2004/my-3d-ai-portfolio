@@ -6,12 +6,11 @@ import HeroSection from '@/components/HeroSection';
 import AboutSection from '@/components/AboutSection';
 import SkillsSection from '@/components/SkillsSection';
 import PortfolioSection from '@/components/PortfolioSection';
-import ServicesSection from '@/components/ServicesSection';
-import ExperienceSection from '@/components/ExperienceSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 import ChatBot from '@/components/ChatBot';
 import BackToTop from '@/components/BackToTop';
+import InteractiveBackground from '@/components/InteractiveBackground';
 
 const Index = () => {
   const [showLoading, setShowLoading] = useState(true);
@@ -25,18 +24,19 @@ const Index = () => {
       </AnimatePresence>
       
       {!showLoading && (
-        <div className="min-h-screen bg-background">
-          <Navigation />
-          <HeroSection />
-          <AboutSection />
-          <SkillsSection />
-          <PortfolioSection />
-          <ServicesSection />
-          <ExperienceSection />
-          <ContactSection />
-          <Footer />
-          <ChatBot />
-          <BackToTop />
+        <div className="min-h-screen bg-background relative">
+          <InteractiveBackground />
+          <div className="relative z-10">
+            <Navigation />
+            <HeroSection />
+            <AboutSection />
+            <SkillsSection />
+            <PortfolioSection />
+            <ContactSection />
+            <Footer />
+            <ChatBot />
+            <BackToTop />
+          </div>
         </div>
       )}
     </>

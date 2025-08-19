@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -6,37 +6,48 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Mail, MessageCircle, Send } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import emailjs from '@emailjs/browser';
+import Map from './Map';
 
 const ContactSection = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
+  const form = useRef<HTMLFormElement>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    if (!form.current) {
+        setIsSubmitting(false);
+        return;
+    }
 
-    toast({
-      title: "Message sent successfully!",
-      description: "Thank you for reaching out. I'll get back to you soon.",
-    });
+    // --- Replace with your EmailJS credentials ---
+    const serviceID = 'YOUR_SERVICE_ID';
+    const templateID = 'YOUR_TEMPLATE_ID';
+    const publicKey = 'YOUR_PUBLIC_KEY';
+    // -----------------------------------------
 
-    setFormData({ name: '', email: '', message: '' });
-    setIsSubmitting(false);
+    emailjs.sendForm(serviceID, templateID, form.current, publicKey)
+      .then(
+        () => {
+          toast({
+            title: "Message sent successfully!",
+            description: "Thanks for reaching out! I'll get back to you soon.",
+          });
+          form.current?.reset();
+          setIsSubmitting(false);
+        },
+        (error) => {
+          toast({
+            title: "Uh oh! Something went wrong.",
+            description: "There was a problem sending your message. Please try again.",
+            variant: "destructive",
+          });
+          setIsSubmitting(false);
+        }
+      );
   };
 
   return (
@@ -50,47 +61,35 @@ const ContactSection = () => {
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             Let's
-            <span className="text-transparent bg-gradient-electric bg-clip-text ml-4">
-              Connect
+            <span className="text-transparent bg-gradient-playful bg-clip-text ml-4">
+              Chat!
             </span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Ready to bring your ideas to life? Let's discuss how we can create 
-            something amazing together.
+            Got a cool idea or just want to say hi? My inbox is always open.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Contact Info */}
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+          {/* Contact Info & Map */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="space-y-6"
+            className="space-y-6 lg:col-span-2"
           >
-            <Card className="bg-gradient-card border-electric/20">
+            <Card className="bg-gradient-card border-border">
               <CardHeader>
-                <CardTitle className="flex items-center gap-3 text-electric">
+                <CardTitle className="flex items-center gap-3 text-primary">
                   <Mail className="h-5 w-5" />
                   Email
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">hello@portfolio.dev</p>
+                <p className="text-muted-foreground">roysnehashis2004@gmail.com</p>
               </CardContent>
             </Card>
-
-            <Card className="bg-gradient-card border-electric/20">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-3 text-electric">
-                  <MessageCircle className="h-5 w-5" />
-                  Response Time
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">Usually within 24 hours</p>
-              </CardContent>
-            </Card>
+            <Map />
           </motion.div>
 
           {/* Contact Form */}
@@ -98,14 +97,14 @@ const ContactSection = () => {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="lg:col-span-2"
+            className="lg:col-span-3"
           >
-            <Card className="bg-gradient-card border-electric/20">
+            <Card className="bg-gradient-card border-border">
               <CardHeader>
-                <CardTitle className="text-electric">Send a Message</CardTitle>
+                <CardTitle className="text-primary">Send a Message</CardTitle>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form ref={form} onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="name" className="block text-sm font-medium mb-2">
@@ -114,11 +113,9 @@ const ContactSection = () => {
                       <Input
                         id="name"
                         name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
                         placeholder="Your name"
                         required
-                        className="bg-cosmic border-electric/30 focus:border-electric"
+                        className="bg-background border-input focus:border-primary"
                       />
                     </div>
                     <div>
@@ -129,11 +126,9 @@ const ContactSection = () => {
                         id="email"
                         name="email"
                         type="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
                         placeholder="your@email.com"
                         required
-                        className="bg-cosmic border-electric/30 focus:border-electric"
+                        className="bg-background border-input focus:border-primary"
                       />
                     </div>
                   </div>
@@ -145,18 +140,16 @@ const ContactSection = () => {
                     <Textarea
                       id="message"
                       name="message"
-                      value={formData.message}
-                      onChange={handleInputChange}
                       placeholder="Tell me about your project..."
                       rows={5}
                       required
-                      className="bg-cosmic border-electric/30 focus:border-electric resize-none"
+                      className="bg-background border-input focus:border-primary resize-none"
                     />
                   </div>
 
                   <Button
                     type="submit"
-                    variant="hero"
+                    variant="default"
                     size="lg"
                     disabled={isSubmitting}
                     className="w-full"

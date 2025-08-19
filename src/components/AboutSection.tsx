@@ -1,40 +1,17 @@
 import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/card';
-import aboutWorkspace from '@/assets/about-workspace.jpg';
+import aboutMeImage from '@/assets/self.png';
 
 const AboutSection = () => {
   const stats = [
-    { label: 'Projects Completed', value: 50, suffix: '+' },
-    { label: 'Years Experience', value: 5, suffix: '+' },
-    { label: 'Technologies Mastered', value: 25, suffix: '+' },
+    { label: 'Projects Completed', value: 5, suffix: '+' },
+    { label: 'Years Experience', value: 2, suffix: '+' },
+    { label: 'Technologies Mastered', value: 10, suffix: '+' },
     { label: 'Client Satisfaction', value: 98, suffix: '%' }
   ];
 
   return (
-    <section id="about" className="py-20 px-6 relative overflow-hidden">
-      {/* Background particles */}
-      <div className="absolute inset-0 overflow-hidden">
-        {[...Array(15)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-electric rounded-full opacity-20"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              scale: [1, 1.5, 1],
-              opacity: [0.2, 0.5, 0.2],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              delay: Math.random() * 3,
-            }}
-          />
-        ))}
-      </div>
-
+    <section id="about" className="py-20 px-6">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -43,14 +20,13 @@ const AboutSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            About
-            <span className="text-transparent bg-gradient-electric bg-clip-text ml-4">
-              Me
+            A Little More
+            <span className="text-transparent bg-gradient-playful bg-clip-text ml-4">
+              About Me
             </span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Passionate about creating the future of web experiences through 
-            innovative technology and cutting-edge design.
+            Just a friendly developer who's super passionate about mixing creativity with tech. My goal is to build cool, innovative things that make a difference.
           </p>
         </motion.div>
 
@@ -62,27 +38,13 @@ const AboutSection = () => {
             viewport={{ once: true }}
             className="relative"
           >
-            <div className="relative rounded-2xl overflow-hidden group">
+            <div className="relative rounded-2xl overflow-hidden group shadow-card">
               <img
-                src={aboutWorkspace}
-                alt="Developer workspace"
-                className="w-full h-96 object-cover transition-smooth group-hover:scale-105"
+                src={aboutMeImage}
+                alt="A photo of Snehashis Roy"
+                className="w-full h-auto object-cover transition-fast group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-hero opacity-60" />
-              <div className="absolute inset-0 bg-electric/20 opacity-0 group-hover:opacity-100 transition-smooth" />
             </div>
-            
-            {/* Floating elements */}
-            <motion.div
-              animate={{ y: [-10, 10, -10] }}
-              transition={{ duration: 4, repeat: Infinity }}
-              className="absolute -top-4 -right-4 w-20 h-20 bg-electric/20 rounded-full blur-xl"
-            />
-            <motion.div
-              animate={{ y: [10, -10, 10] }}
-              transition={{ duration: 3, repeat: Infinity }}
-              className="absolute -bottom-4 -left-4 w-16 h-16 bg-neon/20 rounded-full blur-xl"
-            />
           </motion.div>
 
           {/* Content */}
@@ -94,16 +56,10 @@ const AboutSection = () => {
           >
             <div className="prose prose-lg text-muted-foreground">
               <p className="leading-relaxed">
-                I'm a passionate full-stack developer with a focus on creating 
-                immersive digital experiences. My journey in web development began 
-                with a fascination for AI and 3D graphics, leading me to specialize 
-                in cutting-edge technologies.
+                Hey there! I'm a full-stack developer who just loves to build things. My coding journey started with a big curiosity for AI and 3D graphics, which has led me down some amazing paths.
               </p>
               <p className="leading-relaxed">
-                I believe in the power of technology to transform ideas into reality. 
-                Whether it's building AI-powered applications, creating stunning 3D 
-                web experiences, or developing scalable full-stack solutions, I'm 
-                always pushing the boundaries of what's possible.
+                I get a real kick out of turning a cool idea into something real and interactive. Whether it's a smart AI app, a slick 3D website, or a solid full-stack project, I'm all about pushing the envelope and having fun while doing it.
               </p>
             </div>
 
@@ -117,16 +73,10 @@ const AboutSection = () => {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
                 >
-                  <Card className="bg-gradient-card border-electric/20 p-4 text-center hover:shadow-electric transition-smooth">
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      whileInView={{ scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 + 0.3, type: 'spring' }}
-                      className="text-2xl font-bold text-electric mb-1"
-                    >
+                  <Card className="p-4 text-center transition-fast hover:shadow-playful border-border">
+                    <div className="text-3xl font-bold text-primary mb-1">
                       {stat.value}{stat.suffix}
-                    </motion.div>
+                    </div>
                     <div className="text-sm text-muted-foreground">
                       {stat.label}
                     </div>
