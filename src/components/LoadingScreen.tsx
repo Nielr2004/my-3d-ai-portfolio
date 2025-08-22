@@ -57,8 +57,8 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
   const [quoteIndex, setQuoteIndex] = useState(0);
 
   const socialLinks = [
-    { icon: Github, href: 'https://github.com', label: 'GitHub' },
-    { icon: Linkedin, href: 'https://www.linkedin.com/in/snehashis-roy/', label: 'LinkedIn' },
+    { icon: Github, href: 'https://github.com/Nielr2004', label: 'GitHub' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/snehashis-roy-40691725a/', label: 'LinkedIn' },
     { icon: Mail, href: 'mailto:roysnehashis2004@gmail.com', label: 'Email' }
   ];
 

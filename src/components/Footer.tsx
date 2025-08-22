@@ -5,8 +5,8 @@ import Resume from '@/assets/Resume.pdf';
 
 const Footer = () => {
   const socialLinks = [
-    { icon: Github, href: 'https://github.com', label: 'GitHub' },
-    { icon: Linkedin, href: 'https://www.linkedin.com/in/snehashis-roy/', label: 'LinkedIn' },
+    { icon: Github, href: 'https://github.com/Nielr2004', label: 'GitHub' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/snehashis-roy-40691725a/', label: 'LinkedIn' },
     { icon: Mail, href: 'mailto:roysnehashis2004@gmail.com', label: 'Email' }
   ];
 
@@ -20,12 +20,12 @@ const Footer = () => {
   return (
     <footer className="bg-light-gray dark:bg-muted/20 border-t border-border py-16 px-6">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center sm:text-left mb-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="space-y-4"
+            className="space-y-4 flex flex-col items-center sm:items-start"
           >
             <h3 className="text-2xl font-bold text-transparent bg-gradient-playful bg-clip-text font-pacifico pb-2">
               Snehashis Roy
@@ -49,7 +49,7 @@ const Footer = () => {
             className="space-y-4"
           >
             <h4 className="text-lg font-semibold text-primary">Quick Links</h4>
-            <nav className="flex flex-col space-y-2">
+            <nav className="flex flex-col space-y-2 items-center sm:items-start">
               {[
                 { name: 'Home', id: 'hero' },
                 { name: 'About', id: 'about' },
@@ -59,7 +59,7 @@ const Footer = () => {
                 <button
                   key={link.name}
                   onClick={() => scrollToSection(link.id)}
-                  className="text-muted-foreground hover:text-primary transition-fast text-left"
+                  className="text-muted-foreground hover:text-primary transition-fast"
                 >
                   {link.name}
                 </button>
@@ -76,7 +76,7 @@ const Footer = () => {
           >
             <h4 className="text-lg font-semibold text-primary">Get In Touch</h4>
             <div className="space-y-2 text-muted-foreground">
-              <p>roysnehashis2004@gmail.com</p>
+              <p className="break-all">roysnehashis2004@gmail.com</p>
               <p>Always open to new ideas!</p>
             </div>
           </motion.div>
@@ -89,7 +89,7 @@ const Footer = () => {
             className="space-y-4"
           >
             <h4 className="text-lg font-semibold text-primary">Connect</h4>
-            <div className="flex gap-3">
+            <div className="flex gap-3 justify-center sm:justify-start">
               {socialLinks.map((social) => (
                 <motion.a
                   key={social.label}

@@ -43,7 +43,7 @@ const HeroSection = () => {
   }, [text, isDeleting, index]);
 
   return (
-    <section id="hero" className="min-h-screen relative overflow-hidden flex items-center">
+    <section id="hero" className="min-h-screen relative overflow-hidden flex items-center pt-20 lg:pt-0">
       <div className="absolute inset-0 bg-gradient-hero opacity-20" />
       
       <div className="max-w-7xl mx-auto px-6 w-full">
@@ -58,10 +58,10 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-5xl md:text-7xl font-bold"
+              className="text-4xl sm:text-5xl md:text-7xl font-bold"
             >
               <h1>Hi, I'm Snehashis Roy</h1>
-              <h2 className="text-transparent bg-gradient-playful bg-clip-text min-h-[100px] md:min-h-[172px] font-pacifico">
+              <h2 className="text-transparent bg-gradient-playful bg-clip-text min-h-[80px] sm:min-h-[100px] md:min-h-[120px] font-pacifico text-3xl sm:text-4xl md:text-6xl">
                 {text}
                 <span className="opacity-50 animate-pulse">|</span>
               </h2>
@@ -71,7 +71,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="text-xl text-muted-foreground max-w-xl mx-auto lg:mx-0"
+              className="text-lg sm:text-xl text-muted-foreground max-w-xl mx-auto lg:mx-0"
             >
               I love bringing ideas to life with code, creating cool stuff for the web that's both fun to use and looks great.
             </motion.p>
@@ -81,7 +81,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            className="h-96 lg:h-[500px] relative"
+            className="h-64 sm:h-80 lg:h-[500px] relative"
           >
             <Scene3D />
           </motion.div>

@@ -118,7 +118,7 @@ const ChatBot = () => {
   return (
     <>
       <motion.div
-        className="fixed bottom-24 right-6 z-50"
+        className="fixed bottom-24 right-4 sm:right-6 z-50"
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ delay: 2 }}
@@ -150,7 +150,7 @@ const ChatBot = () => {
             initial={{ opacity: 0, y: 100, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 100, scale: 0.8 }}
-            className="fixed bottom-[120px] right-6 z-40 w-80 h-[28rem]"
+            className="fixed bottom-[120px] right-4 sm:right-6 z-40 w-[calc(100vw-2rem)] sm:w-80 h-[28rem]"
           >
             <Card className="bg-background/80 backdrop-blur-lg border-border h-full flex flex-col shadow-card">
               <CardHeader className="pb-4 border-b">

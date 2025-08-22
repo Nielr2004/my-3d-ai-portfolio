@@ -80,15 +80,15 @@ const SkillsSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12 md:mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
             My Tech
-            <span className="text-transparent bg-gradient-playful bg-clip-text ml-4 font-pacifico pr-6" >
+            <span className="text-transparent bg-gradient-playful bg-clip-text ml-4 font-pacifico pr-6">
               Playground
             </span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto">
             Here are some of the cool tools and technologies I love to work with.
           </p>
         </motion.div>
@@ -102,13 +102,13 @@ const SkillsSection = () => {
           >
             <Card className="bg-gradient-card border-border shadow-card p-4">
               <CardHeader>
-                <CardTitle className="text-center text-2xl font-bold">The Big Picture</CardTitle>
+                <CardTitle className="text-center text-xl sm:text-2xl font-bold">The Big Picture</CardTitle>
               </CardHeader>
-              <CardContent className="h-80">
+              <CardContent className="h-64 sm:h-80">
                 <ResponsiveContainer width="100%" height="100%">
                   <RadarChart cx="50%" cy="50%" outerRadius="80%" data={skillCategories}>
                     <PolarGrid stroke="hsl(var(--border))" />
-                    <PolarAngleAxis dataKey="name" tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 12 }} />
+                    <PolarAngleAxis dataKey="name" tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 10 }} />
                     <Radar name="Proficiency" dataKey="level" stroke="hsl(var(--primary))" fill="hsl(var(--primary))" fillOpacity={0.6} />
                     <Tooltip contentStyle={{
                         backgroundColor: 'hsl(var(--background))',
@@ -122,7 +122,7 @@ const SkillsSection = () => {
           </motion.div>
 
           <div className="lg:col-span-3">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-10">
               {skills.map((category, categoryIndex) => (
                 <motion.div
                   key={category.category}
@@ -133,13 +133,13 @@ const SkillsSection = () => {
                 >
                     <div className="flex items-center gap-3 mb-4">
                       <category.icon className="h-6 w-6 text-primary" />
-                      <h3 className="text-2xl font-bold">{category.category}</h3>
+                      <h3 className="text-xl sm:text-2xl font-bold">{category.category}</h3>
                     </div>
                     <div className="flex flex-wrap gap-2">
                       {category.skills.map((skill) => (
                         <div
                           key={skill}
-                          className="px-3 py-1 text-sm bg-secondary text-secondary-foreground rounded-full"
+                          className="px-3 py-1 text-xs sm:text-sm bg-secondary text-secondary-foreground rounded-full"
                         >
                           {skill}
                         </div>
@@ -156,7 +156,7 @@ const SkillsSection = () => {
               >
                 <div className="flex items-center gap-3 mb-4">
                   <Languages className="h-6 w-6 text-primary" />
-                  <h3 className="text-2xl font-bold">Languages</h3>
+                  <h3 className="text-xl sm:text-2xl font-bold">Languages</h3>
                 </div>
                 <div className="space-y-4">
                   {languages.map((lang, index) => (

@@ -55,15 +55,15 @@ const ContactSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12 md:mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
             Let's
             <span className="text-transparent bg-gradient-playful bg-clip-text ml-4 font-pacifico">
               Chat!
             </span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto">
             Got a cool idea or just want to say hi? My inbox is always open.
           </p>
         </motion.div>
@@ -83,7 +83,7 @@ const ContactSection = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-muted-foreground">roysnehashis2004@gmail.com</p>
+                <p className="text-muted-foreground break-all">roysnehashis2004@gmail.com</p>
               </CardContent>
             </Card>
             <Map />
@@ -101,7 +101,7 @@ const ContactSection = () => {
               </CardHeader>
               <CardContent>
                 <form ref={form} onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label htmlFor="name" className="block text-sm font-medium mb-2">
                         Name

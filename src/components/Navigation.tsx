@@ -42,8 +42,8 @@ const Navigation = () => {
   ];
 
   const socialItems = [
-    { id: 'github', label: 'GitHub', icon: Github, href: 'https://github.com' }, // Replace with your GitHub URL
-    { id: 'linkedin', label: 'LinkedIn', icon: Linkedin, href: 'https://www.linkedin.com/in/snehashis-roy/' }, // Replace with your LinkedIn URL
+    { id: 'github', label: 'GitHub', icon: Github, href: 'https://github.com/Nielr2004' }, // Replace with your GitHub URL
+    { id: 'linkedin', label: 'LinkedIn', icon: Linkedin, href: 'https://www.linkedin.com/in/snehashis-roy-40691725a/' }, // Replace with your LinkedIn URL
     { id: 'resume', label: 'Resume', icon: FileText, href: Resume, download: 'Snehashis_Roy_Resume.pdf' },
   ];
 
@@ -54,8 +54,8 @@ const Navigation = () => {
       transition={{ duration: 0.3, ease: "easeInOut" }}
       className="fixed bottom-0 left-0 right-0 z-50 flex justify-center"
     >
-      <div className="group bg-background/50 backdrop-blur-lg border border-border rounded-full shadow-lg transition-all duration-300 hover:shadow-playful m-4">
-        <div className="flex items-center justify-center p-2 space-x-2">
+      <div className="group bg-background/50 backdrop-blur-lg border border-border rounded-full shadow-lg transition-all duration-300 hover:shadow-playful m-2 sm:m-4">
+        <div className="flex items-center justify-center p-1 sm:p-2 space-x-1 sm:space-x-2">
           {navItems.map((item) => (
             <motion.div
               key={item.id}
@@ -65,7 +65,7 @@ const Navigation = () => {
               <Button
                 variant="ghost"
                 size="icon"
-                className="rounded-full w-12 h-12 relative group/item"
+                className="rounded-full w-10 h-10 sm:w-12 sm:h-12 relative group/item"
                 onClick={() => scrollToSection(item.id)}
               >
                 <motion.div whileHover={{ y: -2 }}>
@@ -79,7 +79,7 @@ const Navigation = () => {
           ))}
 
           {/* Separator */}
-          <div className="h-6 w-px bg-border mx-2"></div>
+          <div className="h-6 w-px bg-border mx-1 sm:mx-2"></div>
 
           {socialItems.map((item) => (
             <motion.div
@@ -90,7 +90,7 @@ const Navigation = () => {
               <Button
                 variant="ghost"
                 size="icon"
-                className="rounded-full w-12 h-12 relative group/item"
+                className="rounded-full w-10 h-10 sm:w-12 sm:h-12 relative group/item"
                 asChild
               >
                 <a href={item.href} target="_blank" rel="noopener noreferrer" download={item.download}>

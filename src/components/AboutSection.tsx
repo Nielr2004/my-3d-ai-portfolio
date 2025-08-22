@@ -17,15 +17,15 @@ const AboutSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12 md:mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
             A Little More
             <span className="text-transparent bg-gradient-playful bg-clip-text ml-4 font-pacifico">
               About Me
             </span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto">
             Just a friendly developer who's super passionate about mixing creativity with tech. My goal is to build cool, innovative things that make a difference.
           </p>
         </motion.div>
@@ -52,7 +52,7 @@ const AboutSection = () => {
             viewport={{ once: true }}
             className="space-y-6"
           >
-            <div className="prose prose-lg text-muted-foreground">
+            <div className="prose prose-lg text-muted-foreground max-w-none">
               <p className="leading-relaxed">
                 Hey there! I'm a full-stack developer who just loves to build things. My coding journey started with a big curiosity for AI and 3D graphics, which has led me down some amazing paths.
               </p>
@@ -71,10 +71,10 @@ const AboutSection = () => {
                   transition={{ delay: index * 0.1 }}
                 >
                   <Card className="p-4 text-center transition-fast hover:shadow-playful border-border">
-                    <div className="text-3xl font-bold text-primary mb-1">
+                    <div className="text-2xl sm:text-3xl font-bold text-primary mb-1">
                       {stat.value}{stat.suffix}
                     </div>
-                    <div className="text-sm text-muted-foreground">
+                    <div className="text-xs sm:text-sm text-muted-foreground">
                       {stat.label}
                     </div>
                   </Card>
