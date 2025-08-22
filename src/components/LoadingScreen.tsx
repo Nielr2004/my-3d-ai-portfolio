@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Github, Linkedin, Mail, Download } from 'lucide-react';
+import Resume from '@/assets/Resume.pdf';
+import { Button } from '@/components/ui/button';
 
 const welcomeText = "Welcome to Snehashis's place";
 const quotes = [
@@ -9,29 +12,68 @@ const quotes = [
   "\"Creativity is intelligence having fun.\" - Albert Einstein"
 ];
 
+const roles = ["world !", "coder !", "users !", "awesome !"];
+
+const LoaderTextAnimation = () => {
+    return (
+        <div className="h-12 text-4xl font-semibold text-foreground flex items-center justify-center overflow-hidden font-pacifico">
+            <motion.span 
+                className="text-primary mr-2 text-5xl"
+                animate={{ opacity: [0, 1, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+            >[</motion.span>
+            <p className="mr-2">Hello</p>
+            <div className="h-10 overflow-hidden">
+                <motion.ul
+                    className="list-none p-0 m-0"
+                    animate={{ y: [0, -40, -80, -120, -80, -40, 0] }}
+                    transition={{
+                        duration: 10,
+                        repeat: Infinity,
+                        ease: "linear"
+                    }}
+                >
+                    {roles.map(role => (
+                        <li key={role} className="h-10 leading-10">
+                            {role}
+                        </li>
+                    ))}
+                     <li key="world-end" className="h-10 leading-10">
+                        world !
+                    </li>
+                </motion.ul>
+            </div>
+            <motion.span 
+                className="text-primary ml-2 text-5xl"
+                animate={{ opacity: [0, 1, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+            >]
+            </motion.span>
+        </div>
+    );
+};
+
 const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
-  const [progress, setProgress] = useState(0);
   const [quoteIndex, setQuoteIndex] = useState(0);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress(prev => {
-        if (prev >= 100) {
-          clearInterval(timer);
-          setTimeout(onComplete, 1000);
-          return 100;
-        }
-        return prev + 1;
-      });
-    }, 30);
+  const socialLinks = [
+    { icon: Github, href: 'https://github.com', label: 'GitHub' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/snehashis-roy/', label: 'LinkedIn' },
+    { icon: Mail, href: 'mailto:roysnehashis2004@gmail.com', label: 'Email' }
+  ];
 
+  useEffect(() => {
     const quoteTimer = setInterval(() => {
       setQuoteIndex(prev => (prev + 1) % quotes.length);
-    }, 2500); // Change quote every 2.5 seconds
+    }, 2500);
+    
+    const completionTimer = setTimeout(() => {
+        onComplete();
+    }, 5000); // Let the screen show for 5 seconds
 
     return () => {
-      clearInterval(timer);
       clearInterval(quoteTimer);
+      clearTimeout(completionTimer);
     };
   }, [onComplete]);
 
@@ -40,16 +82,16 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.08,
+        staggerChildren: 0.05,
       },
     },
   };
 
   const textCharVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      y: 0,
+      transition: { duration: 0.5 }
     },
   };
 
@@ -57,11 +99,11 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
     <motion.div
       initial={{ opacity: 1 }}
       exit={{ opacity: 0, transition: { duration: 0.8, ease: "easeInOut" } }}
-      className="fixed inset-0 bg-background z-50 flex items-center justify-center font-['Inter',_sans-serif]"
+      className="fixed inset-0 bg-background z-50 flex flex-col items-center justify-center font-sans p-6"
     >
       <div className="text-center space-y-8 flex flex-col items-center">
         <motion.h1
-          className="text-4xl md:text-5xl font-bold text-transparent bg-gradient-playful bg-clip-text"
+          className="text-4xl md:text-5xl font-bold text-transparent bg-gradient-playful bg-clip-text font-pacifico pb-6"
           variants={textContainerVariants}
           initial="hidden"
           animate="visible"
@@ -73,14 +115,7 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
           ))}
         </motion.h1>
 
-        <div className="w-80 h-1.5 bg-secondary rounded-full overflow-hidden">
-          <motion.div
-            initial={{ width: 0 }}
-            animate={{ width: `${progress}%` }}
-            className="h-full bg-gradient-playful"
-            transition={{ duration: 0.1, ease: "linear" }}
-          />
-        </div>
+        <LoaderTextAnimation />
         
         <div className="h-12 w-96 flex items-center justify-center">
           <AnimatePresence mode="wait">
@@ -97,6 +132,49 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
           </AnimatePresence>
         </div>
       </div>
+
+      <motion.div 
+        className="absolute bottom-16 text-center space-y-4"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 0.5 }}
+      >
+        <h3 className="text-2xl font-bold text-transparent bg-gradient-playful bg-clip-text font-pacifico pb-2">
+          Snehashis Roy
+        </h3>
+        <div className="flex justify-center gap-3">
+          {socialLinks.map((social) => (
+            <motion.a
+              key={social.label}
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="p-2 bg-secondary hover:bg-primary/20 rounded-lg transition-fast group"
+            >
+              <social.icon className="h-5 w-5 text-primary" />
+            </motion.a>
+          ))}
+        </div>
+        <Button variant="default" size="sm" className="w-fit" asChild>
+          <a href={Resume} download="Snehashis_Roy_Resume.pdf">
+            <Download className="mr-2 h-4 w-4" />
+            Grab My Resume
+          </a>
+        </Button>
+      </motion.div>
+
+      <motion.div
+        className="absolute bottom-6 text-center"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 0.5 }}
+      >
+        <p className="text-muted-foreground text-sm">
+          © {new Date().getFullYear()} Snehashis Roy. Built with fun!
+        </p>
+      </motion.div>
     </motion.div>
   );
 };

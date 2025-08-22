@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Mail, MessageCircle, Send } from 'lucide-react';
+import { Mail, Send } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import emailjs from '@emailjs/browser';
 import Map from './Map';
@@ -23,11 +23,9 @@ const ContactSection = () => {
         return;
     }
 
-    // --- Replace with your EmailJS credentials ---
     const serviceID = 'YOUR_SERVICE_ID';
     const templateID = 'YOUR_TEMPLATE_ID';
     const publicKey = 'YOUR_PUBLIC_KEY';
-    // -----------------------------------------
 
     emailjs.sendForm(serviceID, templateID, form.current, publicKey)
       .then(
@@ -61,7 +59,7 @@ const ContactSection = () => {
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             Let's
-            <span className="text-transparent bg-gradient-playful bg-clip-text ml-4">
+            <span className="text-transparent bg-gradient-playful bg-clip-text ml-4 font-pacifico">
               Chat!
             </span>
           </h2>
@@ -71,7 +69,6 @@ const ContactSection = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
-          {/* Contact Info & Map */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -92,7 +89,6 @@ const ContactSection = () => {
             <Map />
           </motion.div>
 
-          {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}

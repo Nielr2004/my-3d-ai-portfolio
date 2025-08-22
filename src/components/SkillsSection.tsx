@@ -83,13 +83,13 @@ const SkillsSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Skills &
-            <span className="text-transparent bg-gradient-playful bg-clip-text ml-4">
-              Expertise
+            My Tech
+            <span className="text-transparent bg-gradient-playful bg-clip-text ml-4 font-pacifico pr-6" >
+              Playground
             </span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            A comprehensive toolkit of modern technologies for building next-generation applications.
+            Here are some of the cool tools and technologies I love to work with.
           </p>
         </motion.div>
 
@@ -102,7 +102,7 @@ const SkillsSection = () => {
           >
             <Card className="bg-gradient-card border-border shadow-card p-4">
               <CardHeader>
-                <CardTitle className="text-center text-2xl font-bold">Skills Overview</CardTitle>
+                <CardTitle className="text-center text-2xl font-bold">The Big Picture</CardTitle>
               </CardHeader>
               <CardContent className="h-80">
                 <ResponsiveContainer width="100%" height="100%">

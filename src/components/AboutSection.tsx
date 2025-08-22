@@ -21,7 +21,7 @@ const AboutSection = () => {
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             A Little More
-            <span className="text-transparent bg-gradient-playful bg-clip-text ml-4">
+            <span className="text-transparent bg-gradient-playful bg-clip-text ml-4 font-pacifico">
               About Me
             </span>
           </h2>
@@ -31,7 +31,6 @@ const AboutSection = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Image */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -47,7 +46,6 @@ const AboutSection = () => {
             </div>
           </motion.div>
 
-          {/* Content */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -63,7 +61,6 @@ const AboutSection = () => {
               </p>
             </div>
 
-            {/* Stats */}
             <div className="grid grid-cols-2 gap-4 mt-8">
               {stats.map((stat, index) => (
                 <motion.div

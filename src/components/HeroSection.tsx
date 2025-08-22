@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { Button, buttonVariants } from '@/components/ui/button';
 import Scene3D from './Scene3D';
 import { useEffect, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
@@ -42,40 +41,31 @@ const HeroSection = () => {
     const timer = setTimeout(handleTyping, typingSpeed);
     return () => clearTimeout(timer);
   }, [text, isDeleting, index]);
-  
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
     <section id="hero" className="min-h-screen relative overflow-hidden flex items-center">
-      {/* Background Gradient */}
       <div className="absolute inset-0 bg-gradient-hero opacity-20" />
       
       <div className="max-w-7xl mx-auto px-6 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
-          {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             className="space-y-6 text-center lg:text-left"
           >
-            <motion.h1
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-5xl md:text-7xl font-bold leading-tight"
+              className="text-5xl md:text-7xl font-bold"
             >
-              Hi, I'm Snehashis Roy
-              <span className="block text-transparent bg-gradient-playful bg-clip-text min-h-[100px] md:min-h-[120px]">
+              <h1>Hi, I'm Snehashis Roy</h1>
+              <h2 className="text-transparent bg-gradient-playful bg-clip-text min-h-[100px] md:min-h-[172px] font-pacifico">
                 {text}
                 <span className="opacity-50 animate-pulse">|</span>
-              </span>
-            </motion.h1>
+              </h2>
+            </motion.div>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -87,7 +77,6 @@ const HeroSection = () => {
             </motion.p>
           </motion.div>
 
-          {/* Right 3D Scene */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -99,7 +88,6 @@ const HeroSection = () => {
         </div>
       </div>
       
-      {/* Scroll Down Indicator */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}

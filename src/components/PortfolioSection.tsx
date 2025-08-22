@@ -116,7 +116,7 @@ const PortfolioSection = () => {
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
             Some Things
-            <span className="text-transparent bg-gradient-playful bg-clip-text ml-4">
+            <span className="text-transparent bg-gradient-playful bg-clip-text ml-4 font-pacifico pr-1">
               I've Built
             </span>
           </h2>

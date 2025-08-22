@@ -27,7 +27,7 @@ const Footer = () => {
             viewport={{ once: true }}
             className="space-y-4"
           >
-            <h3 className="text-2xl font-bold text-transparent bg-gradient-playful bg-clip-text">
+            <h3 className="text-2xl font-bold text-transparent bg-gradient-playful bg-clip-text font-pacifico pb-2">
               Snehashis Roy
             </h3>
             <p className="text-muted-foreground">
