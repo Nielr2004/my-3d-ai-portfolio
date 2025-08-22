@@ -17,7 +17,7 @@ const ChatBot = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: '1',
-      content: "Hey there! I'm Snehashis's AI assistant. Got any questions about my work? Ask away!",
+      content: "Hey there! I'm Snehashis's AI assistant. How can I help you today?",
       sender: 'bot',
       timestamp: new Date()
     }
@@ -61,15 +61,15 @@ const ChatBot = () => {
     if (lowerMessage.includes('hobbies') || lowerMessage.includes('fun')) {
       return "When he's not coding, Snehashis enjoys exploring new design trends, playing video games, and diving into sci-fi movies. He's also a big fan of trying out different kinds of ramen!";
     }
-
-    if (lowerMessage.includes('react')) {
-      return "He loves React! It's his go-to for building dynamic and interactive user interfaces. You can see it in action in his portfolio website project.";
-    }
-
-    if (lowerMessage.includes('python')) {
-      return "Python is one of his favorite languages, especially for data analysis and AI/ML projects. His Ramen Data Analysis and FaceTrack+ projects are great examples of his Python skills.";
-    }
     
+    if (lowerMessage.includes('joke')) {
+        return "Why don't programmers like nature? It has too many bugs.";
+    }
+
+    if (lowerMessage.includes('who are you') || lowerMessage.includes('what are you')) {
+        return "I'm a friendly AI assistant built to answer questions about Snehashis's portfolio. I'm still learning, but I'll do my best to help!";
+    }
+
     const randomResponses = [
         "That's an interesting question! Let me check...",
         "I'm not sure about that, but I can tell you about his projects!",
@@ -113,12 +113,12 @@ const ChatBot = () => {
     handleSendMessage(input);
   }
 
-  const suggestions = ["Tell me about your projects", "What are your skills?", "How can I contact you?"];
+  const suggestions = ["Tell me about your projects", "What are your skills?", "Tell me a joke"];
 
   return (
     <>
       <motion.div
-        className="fixed bottom-24 right-4 sm:right-6 z-50"
+        className="fixed bottom-20 right-4 sm:right-6 z-50"
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ delay: 2 }}
@@ -150,7 +150,7 @@ const ChatBot = () => {
             initial={{ opacity: 0, y: 100, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 100, scale: 0.8 }}
-            className="fixed bottom-[120px] right-4 sm:right-6 z-40 w-[calc(100vw-2rem)] sm:w-80 h-[28rem]"
+            className="fixed bottom-36 right-4 sm:right-6 z-40 w-[calc(100vw-2rem)] sm:w-80 h-[24rem] sm:h-[28rem]"
           >
             <Card className="bg-background/80 backdrop-blur-lg border-border h-full flex flex-col shadow-card">
               <CardHeader className="pb-4 border-b">
